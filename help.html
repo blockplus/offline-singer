@@ -1,0 +1,63 @@
+
+<h1>User Manual</h1>
+
+<p>This manual explains how to use the Offline Tx Signer, and is meant for end-users.  If you are a developer and want to integrate your system with the Offline Tx Signer, please consult the developer documentation on our site.</p>
+
+<h2>Table of Contents</h2>
+
+<ul>
+	<li><a href="#generate_master_key">Generate Master BIP32 Keys</a></li>
+	<li><a href="#sign_transactions">Sign Transactions</a></li>
+	<li><a href="#sign_single_transaction">Sign Single Transaction</a></li>
+	<li><a href="#hardened_child_keys">Hardened Child Keys</a></li>
+</ul>
+
+
+<a name="generate_master_key">
+<h2>Generate Master BIP32 Keys</h2>
+
+<p>The first thing you need to do is generate your master BIP32 key(s).  Go to the BIP32 Keys menu, then click on the Generate Master Keys button.  Once there, click on the <i>"Generate Master Key"</i> button as many times as you would like, and each time a new, random key-pair will be generated for you.</p>
+
+<p>You will need to copy one (or more, if using multisig) of these key pairs down.  The public key will most likely need to be input into your online system.  The public key allows you to generate new payment addresses, and collect funds, but nothing more.</p>
+
+<p><b>KEEP THE PRIVATE KEY SECURE AT ALL TIMES!</b>  The private key should remain offline at all times, and never touch the internet.  This is the equivalent of your signature on a check, and anyone who has it, will have full access to your funds.  Do not upload it to Dropbox, add it into a Google docs file, e-mail it to yourself, or anything of that nature.  Keep it secure!</p>
+
+<p>Once you have your key pair(s), enter your public key into the online system where necessary.  If you're unsure of how to do this, please contact support of the system / service you're using, and ask where you need to input your BIP32 public key.  Once done, you'll be fully ready to begin accepting new payments.</p>
+
+
+<br><br>
+
+
+<a name="sign_transactions">
+<h2>Sign Transactions</h2>
+
+<p>Your online system should allow you to download a JSON file of pending sends.  When you need to send funds, download the JSON file from your online system.  Then visit the Import menu of this app, where you can upload the JSON file, and also enter your BIP32 private key(s).</p>
+
+<p>The app will first validate every detail within the JSON file to ensure it's valid, and that all transactions can be successfully signed.  It will then go ahead and sign all necessary transactions, and provide you with a report showing the results of the signing process.</p>
+
+<p>At this stage, a <i>Download JSON File</i> button will also be available, which you must click on to download a JSON file of all signed transactions.  You must upload this JSON file back into the online system to complete the sends, and broadcast them to the blockchain.</p>
+
+<br><br>
+
+
+<a name="sign_single_transaction">
+<h2>Sign Single Transaction</h2>
+
+<p>Although only rarely used, through the Sign menu of the app you may sign an individual transaction if you have the unsigned hex code of it.  This is the same hex code that the <i>createrawtransaction()</i> function from bitcoind will provide.</p>
+
+<p>The next screen will display the inputs within the transaction, and ask you to specify the appropriate key indexes and BIP32 private key(s).  If you do not know information such as they key indexes, and please contact tech support of your system / service, and request it.  Once you have successfully input the necessary information, the full hex code of the signed transaction will be displayed, which you can broadcast to the blockchain.</p>
+
+
+<br><br>
+
+<a name="hardened_child_keys">
+<h2>Hardened Child Keys</h2>
+
+<p>BIP32 wallets are hierarchial in nature, and allow you to distribute "sub-wallets" to others, while still retaining control over their funds.  For example, if you're the CEO of a company, you can distribute a separate wallet to each department.  The departments will have access to their own funds, but you as CEO will have access to all department funds as well.  Then if wanted, the departments can provide separate wallets to their employees, meaning the department will have full access to all employee funds within their department, and you as CEO will have access to all department and employee funds.</p>
+
+<p>To do this, you need to generate what's called a <i>"Hardened Child Key"</i>, allowing you to securely provide a private / public key-pair for each wallet.  You can do this by going to the BIP32 Keys menu, and clicking on <i>"Generate Hardened Child Keys"</i>.  Enter your existing BIP32 private key, and any desired key index (numbers only, so employee# for example).  Click on the generate button, and it will provide you with the child key-pair.</p>
+
+<p>These are the private / public keys you want to give the other individual.  This provides them their own BIP32 wallet, and they will have full access to all incoming funds.  At the same time, you will retain access to all funds with your own private key.  The reason for the <i>"hardened"</i> child keys is it breaks the chain, so even if someone's private key is compromised / stolen, they will not be able to trace it back up to your private key.</p>
+
+
+
